@@ -32,6 +32,7 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: target/release/libreedline_rust.dylib
+        tag: ${{ github.ref }}
         overwrite: true
 
     - name: Release Linux lib
@@ -40,6 +41,7 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: target/release/libreedline_rust.so
+        tag: ${{ github.ref }}
         overwrite: true
 
     - name: Release Windows lib
@@ -48,4 +50,5 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: target/release/reedline_rust.dll
+        tag: ${{ github.ref }}
         overwrite: true
