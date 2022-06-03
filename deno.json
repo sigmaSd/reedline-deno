@@ -2,6 +2,7 @@
   "tasks": {
     "build-rs": "cd reedline-rust; cargo build",
     "run-ts": "deno run --unstable -A example.ts",
-    "start": "deno task build-rs && deno task run-ts"
+    "start": "deno task build-rs && deno task run-ts",
+    "fmt": "deno fmt; cd reedline-rust; cargo fmt"
   }
 }
