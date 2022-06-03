@@ -1,6 +1,6 @@
 import { ReedLine } from "./reedline.ts";
 
-const rl = new ReedLine();
+const rl = await ReedLine.new();
 
 while (true) {
   const line = rl.readLine();

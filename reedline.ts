@@ -1,3 +1,5 @@
+import { Plug } from "https://deno.land/x/plug@0.5.1/mod.ts";
+
 interface ReedLineApi extends Deno.ForeignLibraryInterface {
   new: { parameters: never[]; result: "pointer" };
   read_line: { parameters: "pointer"[]; result: "pointer" };
@@ -6,15 +8,27 @@ interface ReedLineApi extends Deno.ForeignLibraryInterface {
 export class ReedLine {
   #lib: Deno.DynamicLibrary<ReedLineApi>;
   #rl: Deno.UnsafePointer;
-  constructor() {
-    this.#lib = Deno.dlopen(
-      "TODO",
-      {
-        new: { parameters: [], result: "pointer" },
-        read_line: { parameters: ["pointer"], result: "pointer" },
-      },
-    );
-    this.#rl = this.#lib.symbols.new();
+  constructor(
+    { lib, rl }: {
+      lib: Deno.DynamicLibrary<ReedLineApi>;
+      rl: Deno.UnsafePointer;
+    },
+  ) {
+    this.#lib = lib;
+    this.#rl = rl;
+  }
+  static async new() {
+    const rustLibPath = Deno.env.get("RUST_LIB_PATH") ||
+      "https://github.com/sigmaSd/reedline-deno/releases/download/0.0.6/";
+    const lib = await Plug.prepare({
+      name: "reedline_rust",
+      url: rustLibPath,
+    }, {
+      new: { parameters: [], result: "pointer" },
+      read_line: { parameters: ["pointer"], result: "pointer" },
+    });
+    const rl = lib.symbols.new();
+    return new ReedLine({ lib, rl });
   }
   readLine(): string | null {
     const ptr = this.#lib.symbols.read_line(this.#rl);
