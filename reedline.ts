@@ -2,7 +2,11 @@ import { Plug } from "https://deno.land/x/plug@0.5.1/mod.ts";
 
 interface ReedLineApi extends Deno.ForeignLibraryInterface {
   new: { parameters: never[]; result: "pointer" };
-  read_line: { parameters: "pointer"[]; result: "pointer" };
+  read_line: {
+    parameters: "pointer"[];
+    result: "pointer";
+    nonblocking: boolean;
+  };
 }
 
 export class ReedLine {
@@ -33,13 +37,17 @@ export class ReedLine {
       policy,
     }, {
       new: { parameters: [], result: "pointer" },
-      read_line: { parameters: ["pointer"], result: "pointer" },
+      read_line: {
+        parameters: ["pointer"],
+        result: "pointer",
+        nonblocking: true,
+      },
     });
     const rl = lib.symbols.new();
     return new ReedLine({ lib, rl });
   }
-  readLine(): string | null {
-    const ptr = this.#lib.symbols.read_line(this.#rl);
+  async readLine() {
+    const ptr = await this.#lib.symbols.read_line(this.#rl);
     if (ptr.value === 0n) {
       return null;
     }
