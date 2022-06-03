@@ -31,7 +31,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/release/libreedline_rust.dylib
+        file: reedline-rust/target/release/libreedline_rust.dylib
         tag: ${{ github.ref }}
         overwrite: true
 
@@ -40,7 +40,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/release/libreedline_rust.so
+        file: reedline-rust/target/release/libreedline_rust.so
         tag: ${{ github.ref }}
         overwrite: true
 
@@ -49,6 +49,6 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/release/reedline_rust.dll
+        file: reedline-rust/target/release/reedline_rust.dll
         tag: ${{ github.ref }}
         overwrite: true
