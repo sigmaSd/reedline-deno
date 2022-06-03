@@ -3,7 +3,7 @@ https://github.com/nushell/reedline/ ffi deno wrapper
 
 ## Usage
 ```ts
-import { ReedLine } from "TODO";
+import { ReedLine } from "https://deno.land/x/reedline_deno/reedline.ts";
 
 const rl = await ReedLine.new();
 
