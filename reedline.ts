@@ -26,7 +26,7 @@ export class ReedLine {
       const maybeDev = Deno.env.get("RUST_LIB_PATH");
       return maybeDev ? { url: maybeDev, policy: Plug.CachePolicy.NONE } : {
         url:
-          "https://github.com/sigmaSd/reedline-deno/releases/download/0.2.0/",
+          "https://github.com/sigmaSd/reedline-deno/releases/download/0.5.0/",
         policy: Plug.CachePolicy.STORE,
       };
     })();
