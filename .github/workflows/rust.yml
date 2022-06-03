@@ -30,6 +30,7 @@ jobs:
       if: runner.os == 'MacOS'
       uses: svenstaro/upload-release-action@v2
       with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: target/release/libreedline_rust.dylib
         overwrite: true
 
@@ -37,6 +38,7 @@ jobs:
       if: runner.os == 'Linux'
       uses: svenstaro/upload-release-action@v2
       with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: target/release/libreedline_rust.so
         overwrite: true
 
@@ -44,5 +46,6 @@ jobs:
       if: runner.os == 'Windows'
       uses: svenstaro/upload-release-action@v2
       with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: target/release/reedline_rust.dll
         overwrite: true
