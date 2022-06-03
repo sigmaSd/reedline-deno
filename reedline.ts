@@ -18,11 +18,19 @@ export class ReedLine {
     this.#rl = rl;
   }
   static async new() {
-    const rustLibPath = Deno.env.get("RUST_LIB_PATH") ||
-      "https://github.com/sigmaSd/reedline-deno/releases/download/master/";
+    const { url, policy } = (() => {
+      const maybeDev = Deno.env.get("RUST_LIB_PATH");
+      return maybeDev ? { url: maybeDev, policy: Plug.CachePolicy.NONE } : {
+        url:
+          "https://github.com/sigmaSd/reedline-deno/releases/download/master/",
+        policy: Plug.CachePolicy.STORE,
+      };
+    })();
+
     const lib = await Plug.prepare({
       name: "reedline_rust",
-      url: rustLibPath,
+      url,
+      policy,
     }, {
       new: { parameters: [], result: "pointer" },
       read_line: { parameters: ["pointer"], result: "pointer" },
