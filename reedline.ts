@@ -19,7 +19,7 @@ export class ReedLine {
   }
   static async new() {
     const rustLibPath = Deno.env.get("RUST_LIB_PATH") ||
-      "https://github.com/sigmaSd/reedline-deno/releases/download/0.0.6/";
+      "https://github.com/sigmaSd/reedline-deno/releases/download/master/";
     const lib = await Plug.prepare({
       name: "reedline_rust",
       url: rustLibPath,
