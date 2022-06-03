@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "build-rs": "cd reedline-rust; cargo build",
+    "run-ts": "deno run --unstable -A reedline.ts",
+    "start": "deno task build-rs && deno task run-ts"
+  }
+}

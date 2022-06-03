@@ -1,0 +1,12 @@
+[package]
+name = "reedline-rust"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+reedline = "0.6.0"
+
+[lib]
+crate-type = ["cdylib"]
+
