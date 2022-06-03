@@ -44,7 +44,7 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: reedline-rust/target/release/libreedline_rust.so
-        tag: ${{ github.event.inputs.tags }}
+        tag: ${{ github.event.inputs.tag }}
         overwrite: true
 
     - name: Release Windows lib
@@ -53,5 +53,5 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: reedline-rust/target/release/reedline_rust.dll
-        tag: ${{ github.event.inputs.tags }}
+        tag: ${{ github.event.inputs.tag }}
         overwrite: true
