@@ -10,8 +10,8 @@ interface ReedLineApi extends Deno.ForeignLibraryInterface {
 }
 
 export class ReedLine {
-  #lib
-  #rl
+  #lib;
+  #rl;
   constructor(
     { lib, rl }: {
       lib: Deno.DynamicLibrary<ReedLineApi>;
@@ -38,7 +38,7 @@ export class ReedLine {
     }, {
       new: { parameters: [], result: "pointer" },
       read_line: {
-        parameters: ["pointer"],
+        parameters: ["pointer", "pointer"],
         result: "pointer",
         nonblocking: true,
       },
@@ -46,8 +46,10 @@ export class ReedLine {
     const rl = lib.symbols.new();
     return new ReedLine({ lib, rl });
   }
-  async readLine() {
-    const ptr = await this.#lib.symbols.read_line(this.#rl)
+  async readLine(prompt?: string) {
+    const p = prompt ? new TextEncoder().encode(prompt + "\0") : null;
+
+    const ptr = await this.#lib.symbols.read_line(this.#rl, p);
     if (ptr === 0n) {
       return null;
     }
