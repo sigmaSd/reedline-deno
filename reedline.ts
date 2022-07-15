@@ -10,12 +10,12 @@ interface ReedLineApi extends Deno.ForeignLibraryInterface {
 }
 
 export class ReedLine {
-  #lib: Deno.DynamicLibrary<ReedLineApi>;
-  #rl: Deno.UnsafePointer;
+  #lib
+  #rl
   constructor(
     { lib, rl }: {
       lib: Deno.DynamicLibrary<ReedLineApi>;
-      rl: Deno.UnsafePointer;
+      rl: bigint;
     },
   ) {
     this.#lib = lib;
@@ -47,8 +47,8 @@ export class ReedLine {
     return new ReedLine({ lib, rl });
   }
   async readLine() {
-    const ptr = await this.#lib.symbols.read_line(this.#rl);
-    if (ptr.value === 0n) {
+    const ptr = await this.#lib.symbols.read_line(this.#rl)
+    if (ptr === 0n) {
       return null;
     }
     return new Deno.UnsafePointerView(ptr).getCString();
