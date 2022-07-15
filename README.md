@@ -5,7 +5,7 @@ https://github.com/nushell/reedline/ ffi deno wrapper
 ## Usage
 
 ```ts
-import { ReedLine } from "https://deno.land/x/reedline_deno/reedline.ts";
+import { ReedLine } from "https://deno.land/x/reedline_deno@0.8.0/reedline.ts";
 
 const rl = await ReedLine.new();
 
