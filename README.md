@@ -10,7 +10,7 @@ import { ReedLine } from "https://deno.land/x/reedline_deno/reedline.ts";
 const rl = await ReedLine.new();
 
 while (true) {
-  const line = rl.readLine();
+  const line = await rl.readLine(); // custom prompt is also possible rl.readline("#> ")
   if (line === null) {
     break;
   }
