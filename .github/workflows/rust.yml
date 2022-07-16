@@ -32,8 +32,21 @@ jobs:
     - name: Release MacOS lib
       if: runner.os == 'MacOS'
       uses: svenstaro/upload-release-action@v2
+      run: |
+        mv src-rust/target/release/libreedline_rust.dylib libreedline_rust_x86_64.dylib
       with:
-        file: src-rust/target/release/libreedline_rust.dylib
+        file: libreedline_rust_x86_64.dylib
+        tag: ${{ github.event.inputs.tag }}
+        overwrite: true
+
+    - name: Release MacOS arm lib
+      if: runner.os == 'Linux'
+      run: |
+        rustup target add aarch64-apple-darwin
+        cargo build --release --manifest-path src-rust/Cargo.toml --target aarch64-apple-darwin
+        mv src-rust/target/aarch64-apple-darwin/release/libreedline_rust.dylib libreedline_rust_aarch64.dylib
+      with:
+        file: libreedline_rust_aarch64.dylib
         tag: ${{ github.event.inputs.tag }}
         overwrite: true
 
