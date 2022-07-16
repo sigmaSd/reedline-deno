@@ -37,7 +37,9 @@ jobs:
     - name: Release MacOS lib1
       if: runner.os == 'MacOS'
       run: |
+        ls src-rust/target/release
         cargo build --release --manifest-path src-rust/Cargo.toml
+        ls src-rust/target/release
         mv src-rust/target/release/libreedline_rust.dylib libreedline_rust_x86_64.dylib
 
     - name: Release MacOS lib2
@@ -56,6 +58,7 @@ jobs:
     - name: Release MacOS arm lib1
       if: runner.os == 'Linux'
       run: |
+        rustup target add aarch64-apple-darwin
         cargo zigbuild --release --manifest-path src-rust/Cargo.toml --target aarch64-apple-darwin
         mv src-rust/target/aarch64-apple-darwin/release/libreedline_rust.dylib libreedline_rust_aarch64.dylib
 
