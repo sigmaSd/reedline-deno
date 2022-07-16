@@ -28,9 +28,11 @@ while (true) {
 
 ## Development
 
-** workflow **
+**workflow:**
 
 - `deno task example` should be used to test changes.
 
-** design ** Try to mimic https://docs.rs/reedline/latest/reedline api as best
+**design:**
+
+- Try to mimic https://docs.rs/reedline/latest/reedline api as best
 as typescript allows.
