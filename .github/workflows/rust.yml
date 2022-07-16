@@ -27,13 +27,13 @@ jobs:
       uses: actions-rs/cargo@v1
       with:
         command: build
-        args: --release --manifest-path reedline-rust/Cargo.toml
+        args: --release --manifest-path src-rust/Cargo.toml
 
     - name: Release MacOS lib
       if: runner.os == 'MacOS'
       uses: svenstaro/upload-release-action@v2
       with:
-        file: reedline-rust/target/release/libreedline_rust.dylib
+        file: src-rust/target/release/libreedline_rust.dylib
         tag: ${{ github.event.inputs.tag }}
         overwrite: true
 
@@ -41,7 +41,7 @@ jobs:
       if: runner.os == 'Linux'
       uses: svenstaro/upload-release-action@v2
       with:
-        file: reedline-rust/target/release/libreedline_rust.so
+        file: src-rust/target/release/libreedline_rust.so
         tag: ${{ github.event.inputs.tag }}
         overwrite: true
 
@@ -49,6 +49,6 @@ jobs:
       if: runner.os == 'Windows'
       uses: svenstaro/upload-release-action@v2
       with:
-        file: reedline-rust/target/release/reedline_rust.dll
+        file: src-rust/target/release/reedline_rust.dll
         tag: ${{ github.event.inputs.tag }}
         overwrite: true
