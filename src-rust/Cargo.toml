@@ -5,6 +5,7 @@ edition = "2021"
 
 
 [dependencies]
+nanoserde = "0.1.30"
 reedline = "0.8.0"
 
 [lib]
