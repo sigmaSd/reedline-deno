@@ -24,13 +24,10 @@ jobs:
         toolchain: stable
 
     - uses: goto-bus-stop/setup-zig@v1
-
-
-    - name: Build
-      uses: actions-rs/cargo@v1
       with:
-        command: build
-        args: --release --manifest-path src-rust/Cargo.toml
+        version: 0.9.0
+
+
 
     - name: Release MacOS lib1
       if: runner.os == 'MacOS'
