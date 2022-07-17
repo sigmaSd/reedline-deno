@@ -17,3 +17,11 @@ while (true) {
   }
   console.log(line.value);
 }
+
+import {} from "./src/extra.ts";
+
+const answer = await rl.question("What's up?", {
+  render_prompt_left: "??> ",
+  render_prompt_right: "<#",
+});
+console.log("You are: ", answer.value);
