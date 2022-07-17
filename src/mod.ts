@@ -33,26 +33,25 @@ export class ReedLine {
     this.#rl = rl;
   }
   static async create() {
+    const name = "reedline_rust";
+    const url = "https://github.com/sigmaSd/reedline-deno/releases/download";
+    const version = "0.10.0";
+
     const result = (() => {
       const maybeDev = Deno.env.get("RUST_LIB_PATH");
       return maybeDev ? { url: maybeDev, policy: Plug.CachePolicy.NONE } : {
         urls: {
           darwin: {
-            aarch64:
-              "https://github.com/sigmaSd/reedline-deno/releases/download/0.10.0/libreedline_rust_aarch64.dylib",
-            x86_64:
-              "https://github.com/sigmaSd/reedline-deno/releases/download/0.10.0/libreedline_rust_x86_64.dylib",
+            aarch64: `${url}/${version}/lib${name}_aarch64.dylib`,
+            x86_64: `${url}/${version}/lib${name}_x86_64.dylib`,
           },
-          windows:
-            "https://github.com/sigmaSd/reedline-deno/releases/download/0.10.0/reedline_rust.dll",
-          linux:
-            "https://github.com/sigmaSd/reedline-deno/releases/download/0.10.0/libreedline_rust.so",
+          windows: `${url}/${version}/${name}.dll`,
+          linux: `${url}/${version}/lib${name}.so`,
         },
         policy: Plug.CachePolicy.STORE,
       };
     })();
 
-    const name = "reedline_rust";
     const lib = await Plug.prepare(
       result.url
         ? { name, url: result.url, policy: result.policy }
