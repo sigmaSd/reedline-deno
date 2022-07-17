@@ -4,6 +4,8 @@ https://github.com/nushell/reedline/ deno ffi wrapper
 
 ## Usage
 
+- this library requires `--unstable` flag
+
 ```ts
 import { ReedLine } from "https://deno.land/x/reedline_deno@0.10.0/src/mod.ts";
 
