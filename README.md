@@ -7,7 +7,7 @@ https://github.com/nushell/reedline/ deno ffi wrapper
 - This library requires `--unstable` flag
 
 ```ts
-import { ReedLine } from "https://deno.land/x/reedline_deno@0.14.0/src/mod.ts";
+import { ReedLine } from "https://deno.land/x/reedline_deno@0.16.0/src/mod.ts";
 
 const rl = await ReedLine.create();
 
@@ -27,7 +27,7 @@ while (true) {
   console.log(line.value);
 }
 
-import {} from "https://deno.land/x/reedline_deno@0.14.0/src/extra.ts";
+import {} from "https://deno.land/x/reedline_deno@0.16.0/src/extra.ts";
 
 const answer = await rl.question("What's up?", {
   render_prompt_left: "??> ",
