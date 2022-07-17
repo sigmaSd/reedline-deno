@@ -27,7 +27,7 @@ while (true) {
   console.log(line.value);
 }
 
-import { ReedLine } from "https://deno.land/x/reedline_deno@0.13.0/src/extra.ts";
+import {} from "https://deno.land/x/reedline_deno@0.13.0/src/extra.ts";
 
 const answer = await rl.question("What's up?", {
   render_prompt_left: "??> ",
