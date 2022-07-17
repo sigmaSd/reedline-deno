@@ -34,5 +34,5 @@ while (true) {
 
 **design:**
 
-- Try to mimic https://docs.rs/reedline/latest/reedline api as best
-as typescript allows.
+- Try to mimic https://docs.rs/reedline/latest/reedline api as best as
+  typescript allows.
