@@ -41,6 +41,7 @@ console.log("You are: ", answer.value);
 **workflow:**
 
 - `deno task example` should be used to test changes.
+- If `CARGO_TARGET_DIR` is not already set you need to run with `CARGO_TARGET_DIR=$PWD/target deno task example`
 
 **design:**
 
