@@ -42,6 +42,8 @@ export class ReedLine {
       {
         name,
         url: Deno.env.get("RUST_LIB_PATH") || url,
+        // reload all cache if developping locally
+        cache: Deno.env.get("RUST_LIB_PATH") ? "reloadAll" : "use",
         suffixes: {
           darwin: {
             aarch64: "_aarch64.dylib",
