@@ -1,1 +1,1 @@
-export { Plug } from "https://deno.land/x/plug@0.5.2/mod.ts";
+export * as plug from "https://deno.land/x/plug@1.0.2/mod.ts";

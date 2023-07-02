@@ -1,10 +1,10 @@
-import { Plug } from "./deps.ts";
+import { plug } from "./deps.ts";
 import { decode, encode } from "./utils.ts";
 
 interface ReedLineApi extends Deno.ForeignLibraryInterface {
   create: { parameters: never[]; result: "pointer" };
   read_line: {
-    parameters: "pointer"[];
+    parameters: ["pointer", "buffer"];
     result: "pointer";
     nonblocking: boolean;
   };
@@ -26,7 +26,7 @@ export class ReedLine {
   constructor(
     { lib, rl }: {
       lib: Deno.DynamicLibrary<ReedLineApi>;
-      rl: bigint;
+      rl: Deno.PointerValue;
     },
   ) {
     this.#lib = lib;
@@ -34,32 +34,25 @@ export class ReedLine {
   }
   static async create() {
     const name = "reedline_rust";
-    const url = "https://github.com/sigmaSd/reedline-deno/releases/download";
-    const version = "0.10.0";
+    const version = "0.11.0";
+    const url =
+      `https://github.com/sigmaSd/reedline-deno/releases/download/${version}`;
 
-    const result = (() => {
-      const maybeDev = Deno.env.get("RUST_LIB_PATH");
-      return maybeDev ? { url: maybeDev, policy: Plug.CachePolicy.NONE } : {
-        urls: {
+    const lib = await plug.dlopen(
+      {
+        name,
+        url: Deno.env.get("RUST_LIB_PATH") || url,
+        suffixes: {
           darwin: {
-            aarch64: `${url}/${version}/lib${name}_aarch64.dylib`,
-            x86_64: `${url}/${version}/lib${name}_x86_64.dylib`,
+            aarch64: "_aarch64.dylib",
+            x86_64: "_x86_64.dylib",
           },
-          windows: `${url}/${version}/${name}.dll`,
-          linux: `${url}/${version}/lib${name}.so`,
         },
-        policy: Plug.CachePolicy.STORE,
-      };
-    })();
-
-    const lib = await Plug.prepare(
-      result.url
-        ? { name, url: result.url, policy: result.policy }
-        : { name, urls: result.urls!, policy: result.policy },
+      },
       {
         create: { parameters: [], result: "pointer" },
         read_line: {
-          parameters: ["pointer", "pointer"],
+          parameters: ["pointer", "buffer"],
           result: "pointer",
           nonblocking: true,
         },
