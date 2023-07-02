@@ -7,7 +7,7 @@ https://github.com/nushell/reedline/ deno ffi wrapper
 - This library requires `--unstable` flag
 
 ```ts
-import { ReedLine } from "https://deno.land/x/reedline_deno@0.16.0/src/mod.ts";
+import { ReedLine } from "https://deno.land/x/reedline_deno@0.17.1/src/mod.ts";
 
 const rl = await ReedLine.create();
 
@@ -27,7 +27,9 @@ while (true) {
   console.log(line.value);
 }
 
-import {} from "https://deno.land/x/reedline_deno@0.16.0/src/extra.ts";
+console.log("Now extra showcase:");
+
+import {} from "https://deno.land/x/reedline_deno@0.17.1/src/extra.ts";
 
 const answer = await rl.question("What's up?", {
   render_prompt_left: "??> ",
@@ -41,7 +43,8 @@ console.log("You are: ", answer.value);
 **workflow:**
 
 - `deno task example` should be used to test changes.
-- If `CARGO_TARGET_DIR` is not already set you need to run with `CARGO_TARGET_DIR=$PWD/target deno task example`
+- If `CARGO_TARGET_DIR` is not already set you need to run with
+  `CARGO_TARGET_DIR=$PWD/target deno task example`
 
 **design:**
 

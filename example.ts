@@ -18,6 +18,8 @@ while (true) {
   console.log(line.value);
 }
 
+console.log("Now extra showcase:");
+
 import {} from "./src/extra.ts";
 
 const answer = await rl.question("What's up?", {

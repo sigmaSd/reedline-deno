@@ -34,7 +34,7 @@ export class ReedLine {
   }
   static async create() {
     const name = "reedline_rust";
-    const version = "0.11.0";
+    const version = "0.17.0";
     const url =
       `https://github.com/sigmaSd/reedline-deno/releases/download/${version}`;
 
